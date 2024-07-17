@@ -16,9 +16,23 @@ void Grid::draw()
 	}
 }
 
+// check if a row/column represents a valid cell
+bool Grid::inBounds(int row, int column)
+{
+	return (row >= 0 && row < rows && column >= 0 && column < columns);
+}
+
 // manually set the value of a single cell
 void Grid::setValue(int row, int column, int value)
 {
-	if(row >= 0 && row < rows && column >= 0 && column < columns )
+	if(inBounds(row, column))
 		cells[row][column] = value;
+}
+
+// return alive value of cell
+int Grid::getValue(int row, int column)
+{
+	if (inBounds(row, column))
+		return cells[row][column];
+	return 0;
 }

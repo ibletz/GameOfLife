@@ -3,8 +3,9 @@
 // 2027/07/16
 // tutorial : youtube.com/watch?v=daFYGrXq0aw
 
+#include <iostream>
 #include "raylib.h"
-#include "grid.h"
+#include "simulation.h"
 
 int main()
 {
@@ -17,7 +18,12 @@ int main()
 	InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Game of Life");
 	SetTargetFPS(FPS);
 
-	Grid grid{ WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE };
+	Simulation simulation{ WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE };
+	simulation.setCellValue(5, 29, 1);
+	simulation.setCellValue(5, 0, 0);
+	simulation.setCellValue(4, 0, 1);
+	
+	std::cout << simulation.countLiveNeighbors(5, 29) << '\n';
 
 	// simulation loop
 	while (WindowShouldClose() == false)
@@ -29,11 +35,9 @@ int main()
 		// drawing
 		BeginDrawing();
 		ClearBackground(GREY);
-		grid.draw();
+		simulation.draw();
 		EndDrawing();
 	}
-
-
 
 	CloseWindow();
 	return 0;

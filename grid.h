@@ -12,7 +12,11 @@ public:
 	{}
 
 	void draw();
+	bool inBounds(int row, int column);
 	void setValue(int row, int column, int value);
+	int getValue(int row, int column);
+	int getRows() { return rows; }
+	int getColumns() { return columns; }
 
 private:
 	int rows{};
@@ -20,4 +24,5 @@ private:
 	int cellSize{};
 	// 2D vector to hold grid
 	std::vector<std::vector<int>> cells;
+
 };

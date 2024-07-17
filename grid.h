@@ -18,6 +18,7 @@ public:
 	int getRows() { return rows; }
 	int getColumns() { return columns; }
 	void fillRandom();
+	void clear();
 
 private:
 	int rows{};

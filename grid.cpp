@@ -50,3 +50,15 @@ void Grid::fillRandom()
 		}
 	}
 }
+
+// clear the grid of all live cells
+void Grid::clear()
+{
+	for (int row = 0; row < rows; row++)
+	{
+		for (int column = 0; column < columns; column++)
+		{
+			cells[row][column] = 0;
+		}
+	}
+}

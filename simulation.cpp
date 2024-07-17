@@ -7,11 +7,13 @@ void Simulation::draw()
 	grid.draw();
 }
 
+// set a specific cell's value
 void Simulation::setCellValue(int row, int column, int value)
 {
 	grid.setValue(row, column, value);
 }
 
+// return a count of all live neighbors of the specific cell
 int Simulation::countLiveNeighbors(int row, int column)
 {
 	int liveNeighbors{ 0 };
@@ -40,45 +42,63 @@ int Simulation::countLiveNeighbors(int row, int column)
 	return liveNeighbors;
 }
 
+// update the state of the cells
 void Simulation::update()
 {
-	// iterate over the cells and update them based on rules
-	for (int row = 0; row < grid.getRows(); row++)
+	if (isRunning())
 	{
-		for (int column = 0; column < grid.getColumns(); column++)
+		// iterate over the cells and update them based on rules
+		for (int row = 0; row < grid.getRows(); row++)
 		{
-			int liveNeighbors = countLiveNeighbors(row, column);
-			int cellValue = grid.getValue(row, column);
-
-			if (cellValue == 1)
+			for (int column = 0; column < grid.getColumns(); column++)
 			{
-				if (liveNeighbors > 3 || liveNeighbors < 2)
+				int liveNeighbors = countLiveNeighbors(row, column);
+				int cellValue = grid.getValue(row, column);
+
+				if (cellValue == 1)
 				{
-					// set the cell as dead on the temp grid 
-					tempGrid.setValue(row, column, 0);
+					if (liveNeighbors > 3 || liveNeighbors < 2)
+					{
+						// set the cell as dead on the temp grid 
+						tempGrid.setValue(row, column, 0);
+					}
+					else
+					{
+						// keep the cell alive on the temp grid
+						tempGrid.setValue(row, column, 1);
+					}
 				}
 				else
 				{
-					// keep the cell alive on the temp grid
-					tempGrid.setValue(row, column, 1);
+					if (liveNeighbors == 3)
+					{
+						// set the cell alive on the temp grid
+						tempGrid.setValue(row, column, 1);
+					}
+					else
+					{
+						// keep the cell dead
+						tempGrid.setValue(row, column, 0);
+					}
 				}
-			}
-			else
-			{
-				if (liveNeighbors == 3)
-				{
-					// set the cell alive on the temp grid
-					tempGrid.setValue(row, column, 1);
-				}
-				else
-				{
-					// keep the cell dead
-					tempGrid.setValue(row, column, 0);
-				}
-			}
 
+			}
 		}
+		// copy the updated values to the original grid
+		grid = tempGrid;
 	}
-	// copy the updated values to the original grid
-	grid = tempGrid;
+}
+
+// reset the grid to all 0s
+void Simulation::clearGrid()
+{
+	if (!isRunning())
+		grid.clear();
+}
+
+// create a random starting state for the grid
+void Simulation::createRandomState()
+{
+	if (!isRunning())
+		grid.fillRandom();
 }

@@ -36,3 +36,17 @@ int Grid::getValue(int row, int column)
 		return cells[row][column];
 	return 0;
 }
+
+// fill the grid with random values
+void Grid::fillRandom()
+{
+	for (int row = 0; row < rows; row++)
+	{
+		for (int column = 0; column < columns; column++)
+		{
+			// adjust second GetRandomValue() argument to increase/decrease live starting cells
+			int randomValue = GetRandomValue(0, 4);
+			cells[row][column] = (randomValue == 4) ? 1 : 0;
+		}
+	}
+}

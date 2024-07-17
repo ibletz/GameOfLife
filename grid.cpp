@@ -67,6 +67,6 @@ void Grid::clear()
 void Grid::toggleCell(int row, int column)
 {
 	if (inBounds(row, column))
-		cells[row][column] = !(cells[row][column]);
+		cells[row][column] = (cells[row][column] == 1) ? 0 : 1;
 
 }

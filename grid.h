@@ -19,6 +19,7 @@ public:
 	int getColumns() { return columns; }
 	void fillRandom();
 	void clear();
+	void toggleCell(int row, int column);
 
 private:
 	int rows{};

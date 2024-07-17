@@ -62,3 +62,11 @@ void Grid::clear()
 		}
 	}
 }
+
+// toggle the value of the specific cell
+void Grid::toggleCell(int row, int column)
+{
+	if (inBounds(row, column))
+		cells[row][column] = !(cells[row][column]);
+
+}

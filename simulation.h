@@ -19,6 +19,7 @@ public:
 	void stop() { run = false; }
 	void clearGrid();
 	void createRandomState();
+	void toggleCell(int row, int column);
 
 
 private:

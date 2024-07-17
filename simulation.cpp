@@ -102,3 +102,10 @@ void Simulation::createRandomState()
 	if (!isRunning())
 		grid.fillRandom();
 }
+
+// toggle the value of the cell
+void Simulation::toggleCell(int row, int column)
+{
+	if (!isRunning())
+		grid.toggleCell(row, column);
+}
